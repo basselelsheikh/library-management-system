@@ -35,4 +35,11 @@ public class BookService {
         // Save the book using the BookRepository
         return bookRepository.save(book);
     }
+
+    public Book updateBook(Book updatedBook) {
+        // Perform any necessary validation or business logic before updating the book
+        
+        // Save the updated book using the BookRepository
+        return bookRepository.save(updatedBook);
+    }
 }
