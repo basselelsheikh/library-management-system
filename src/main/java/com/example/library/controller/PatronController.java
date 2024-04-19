@@ -10,11 +10,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.library.model.Patron;
 import com.example.library.service.PatronService;
-
+@RequestMapping("/api/patrons")
 @RestController
 public class PatronController {
 
@@ -25,13 +26,13 @@ public class PatronController {
         this.patronService = patronService;
     }
 
-    @GetMapping("/api/patrons")
+    @GetMapping
     public ResponseEntity<List<Patron>> getAllPatrons() {
         List<Patron> patrons = patronService.getAllPatrons();
         return new ResponseEntity<>(patrons, HttpStatus.OK);
     }
 
-    @GetMapping("/api/patrons/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Patron> getPatronById(@PathVariable("id") Long id) {
         Patron patron = patronService.getPatronById(id);
         if (patron != null) {
@@ -41,13 +42,13 @@ public class PatronController {
         }
     }
 
-    @PostMapping("/api/patrons")
+    @PostMapping
     public ResponseEntity<Patron> addPatron(@RequestBody Patron patron) {
         Patron savedPatron = patronService.addPatron(patron);
         return new ResponseEntity<>(savedPatron, HttpStatus.CREATED);
     }
 
-    @PutMapping("/api/patrons/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Patron> updatePatron(@PathVariable("id") Long id, @RequestBody Patron updatedPatron) {
         Patron existingPatron = patronService.getPatronById(id);
         if (existingPatron != null) {
@@ -59,7 +60,7 @@ public class PatronController {
         }
     }
 
-    @DeleteMapping("/api/patrons/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePatron(@PathVariable("id") Long id) {
         boolean deleted = patronService.deletePatronById(id);
         if (deleted) {
