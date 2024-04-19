@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -13,35 +14,35 @@ import jakarta.persistence.MapsId;
 
 @Entity
 public class BorrowingRecord {
-    @EmbeddedId
-    private BorrowingRecordId id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     
-    @ManyToOne
-    @MapsId("patronId")
-    @JoinColumn(name = "patron_id")
+    @ManyToOne(fetch = FetchType.LAZY)
     private Patron patron;
 
-    @ManyToOne
-    @MapsId("bookId")
-    @JoinColumn(name = "book_id")
+    @ManyToOne(fetch = FetchType.LAZY)
     private Book book;
+
     private LocalDate borrowingDate;
     private LocalDate returnDate;
 
     public BorrowingRecord() {
     }
 
-    public BorrowingRecord(BorrowingRecordId id, LocalDate borrowingDate, LocalDate returnDate) {
-        this.id = id;
+    public BorrowingRecord(LocalDate borrowingDate,Book book, Patron patron, LocalDate returnDate) {
+        this.book = book;
+        this.patron = patron;
         this.borrowingDate = borrowingDate;
         this.returnDate = returnDate;
     }
 
-    public BorrowingRecordId getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(BorrowingRecordId id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

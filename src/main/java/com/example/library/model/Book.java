@@ -1,11 +1,14 @@
 package com.example.library.model;
 
 import java.util.List;
+import java.util.Set;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Transient;
 
 @Entity
@@ -17,6 +20,10 @@ public class Book {
     private String author;
     private int publicationYear;
     private String isbn;
+
+    @OneToMany(mappedBy = "book")
+    Set<BorrowingRecord> borrowingRecords;
+    
 
     public Book() {
     }
@@ -77,6 +84,6 @@ public class Book {
 
         // Check if there is any borrowing record with a null return date (indicating it's still borrowed)
         return borrowingRecords.stream()
-                .anyMatch(record -> record.getBook().equals(this) && record.getReturnDate() == null);
+                .anyMatch(record -> record.getBook().equals(this) && record.getReturnDate() != null);
     }
 }
