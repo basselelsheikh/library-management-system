@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.library.model.Patron;
 import com.example.library.service.PatronService;
+
+import jakarta.validation.Valid;
 @RequestMapping("/api/patrons")
 @RestController
 public class PatronController {
@@ -43,13 +45,13 @@ public class PatronController {
     }
 
     @PostMapping
-    public ResponseEntity<Patron> addPatron(@RequestBody Patron patron) {
+    public ResponseEntity<Patron> addPatron(@Valid @RequestBody Patron patron) {
         Patron savedPatron = patronService.addPatron(patron);
         return new ResponseEntity<>(savedPatron, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Patron> updatePatron(@PathVariable("id") Long id, @RequestBody Patron updatedPatron) {
+    public ResponseEntity<Patron> updatePatron(@PathVariable("id") Long id, @Valid @RequestBody Patron updatedPatron) {
         Patron existingPatron = patronService.getPatronById(id);
         if (existingPatron != null) {
             updatedPatron.setId(id); // Ensure the updated patron has the correct ID

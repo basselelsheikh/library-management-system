@@ -2,15 +2,12 @@ package com.example.library.model;
 
 import java.time.LocalDate;
 
-import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.MapsId;
 
 @Entity
 public class BorrowingRecord {
@@ -46,13 +43,13 @@ public class BorrowingRecord {
         this.id = id;
     }
 
-    // public Patron getPatron() {
-    //     return patron;
-    // }
+    public Patron getPatron() {
+        return patron;
+    }
 
-    // public void setPatron(Patron patron) {
-    //     this.patron = patron;
-    // }
+    public void setPatron(Patron patron) {
+        this.patron = patron;
+    }
 
     public Book getBook() {
         return book;

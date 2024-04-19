@@ -7,14 +7,29 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Patron {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank(message = "Name is required")
     private String name;
-    private String contactInformation;
+
+    
+    @Email(message = "Please provide a valid email address")
+    private String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     @OneToMany(mappedBy = "patron")
     Set<BorrowingRecord> borrowingRecords;
@@ -22,9 +37,9 @@ public class Patron {
     public Patron() {
     }
 
-    public Patron(String name, String contactInformation) {
+    public Patron(String name, String email) {
         this.name = name;
-        this.contactInformation = contactInformation;
+        this.email = email;
     }
 
     public Long getId() {
@@ -41,13 +56,5 @@ public class Patron {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getContactInformation() {
-        return contactInformation;
-    }
-
-    public void setContactInformation(String contactInformation) {
-        this.contactInformation = contactInformation;
     }
 }
