@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -43,6 +44,18 @@ public class PatronController {
     public ResponseEntity<Patron> addPatron(@RequestBody Patron patron) {
         Patron savedPatron = patronService.addPatron(patron);
         return new ResponseEntity<>(savedPatron, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/api/patrons/{id}")
+    public ResponseEntity<Patron> updatePatron(@PathVariable("id") Long id, @RequestBody Patron updatedPatron) {
+        Patron existingPatron = patronService.getPatronById(id);
+        if (existingPatron != null) {
+            updatedPatron.setId(id); // Ensure the updated patron has the correct ID
+            Patron savedPatron = patronService.updatePatron(updatedPatron);
+            return new ResponseEntity<>(savedPatron, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
 }

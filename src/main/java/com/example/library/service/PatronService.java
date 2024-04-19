@@ -34,4 +34,11 @@ public class PatronService {
         // Save the patron using the PatronRepository
         return patronRepository.save(patron);
     }
+
+    public Patron updatePatron(Patron updatedPatron) {
+        // Perform any necessary validation or business logic before updating the patron
+
+        // Save the updated patron using the PatronRepository
+        return patronRepository.save(updatedPatron);
+    }
 }
