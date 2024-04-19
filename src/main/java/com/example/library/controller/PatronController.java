@@ -60,7 +60,7 @@ public class PatronController {
     }
 
     @DeleteMapping("/api/patrons/{id}")
-    public ResponseEntity<Void> deletePatron(@PathVariable Long id) {
+    public ResponseEntity<Void> deletePatron(@PathVariable("id") Long id) {
         boolean deleted = patronService.deletePatronById(id);
         if (deleted) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
