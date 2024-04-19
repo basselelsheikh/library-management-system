@@ -41,4 +41,13 @@ public class PatronService {
         // Save the updated patron using the PatronRepository
         return patronRepository.save(updatedPatron);
     }
+
+    public boolean deletePatronById(Long id) {
+        if (patronRepository.existsById(id)) {
+            patronRepository.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
