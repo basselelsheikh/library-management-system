@@ -1,9 +1,12 @@
 package com.example.library.model;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Transient;
 
 @Entity
 public class Book {
@@ -63,5 +66,17 @@ public class Book {
 
     public void setIsbn(String isbn) {
         this.isbn = isbn;
+    }
+
+    @Transient
+    public boolean isAvailableForBorrowing(List<BorrowingRecord> borrowingRecords) {
+        // If there are no borrowing records, the book is available
+        if (borrowingRecords == null || borrowingRecords.isEmpty()) {
+            return true;
+        }
+
+        // Check if there is any borrowing record with a null return date (indicating it's still borrowed)
+        return borrowingRecords.stream()
+                .anyMatch(record -> record.getBook().equals(this) && record.getReturnDate() == null);
     }
 }

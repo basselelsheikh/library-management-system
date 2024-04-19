@@ -2,53 +2,64 @@ package com.example.library.model;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MapsId;
 
+@Entity
 public class BorrowingRecord {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private Long bookId;
-    private Long patronId;
+    @EmbeddedId
+    private BorrowingRecordId id;
+    
+    @ManyToOne
+    @MapsId("patronId")
+    @JoinColumn(name = "patron_id")
+    private Patron patron;
+
+    @ManyToOne
+    @MapsId("bookId")
+    @JoinColumn(name = "book_id")
+    private Book book;
     private LocalDate borrowingDate;
     private LocalDate returnDate;
 
     public BorrowingRecord() {
     }
 
-    public BorrowingRecord(Long bookId, Long patronId, LocalDate borrowingDate, LocalDate returnDate) {
-        this.bookId = bookId;
-        this.patronId = patronId;
+    public BorrowingRecord(BorrowingRecordId id, LocalDate borrowingDate, LocalDate returnDate) {
+        this.id = id;
         this.borrowingDate = borrowingDate;
         this.returnDate = returnDate;
     }
 
-    public Long getId() {
+    public BorrowingRecordId getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(BorrowingRecordId id) {
         this.id = id;
     }
 
-    public Long getBookId() {
-        return bookId;
+    // public Patron getPatron() {
+    //     return patron;
+    // }
+
+    // public void setPatron(Patron patron) {
+    //     this.patron = patron;
+    // }
+
+    public Book getBook() {
+        return book;
     }
 
-    public void setBookId(Long bookId) {
-        this.bookId = bookId;
+    public void setBook(Book book) {
+        this.book = book;
     }
-
-    public Long getPatronId() {
-        return patronId;
-    }
-
-    public void setPatronId(Long patronId) {
-        this.patronId = patronId;
-    }
-
     public LocalDate getBorrowingDate() {
         return borrowingDate;
     }
