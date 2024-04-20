@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.library.service.BorrowingService;
 
 @RestController
-@RequestMapping("/api/borrow")
+@RequestMapping("/api")
 public class BorrowingController {
 
     private final BorrowingService borrowingService;
@@ -22,13 +22,13 @@ public class BorrowingController {
         this.borrowingService = borrowingService;
     }
 
-    @PostMapping("/{bookId}/patron/{patronId}")
+    @PostMapping("/borrow/{bookId}/patron/{patronId}")
     public ResponseEntity<?> borrowBook(@PathVariable("bookId") Long bookId, @PathVariable("patronId") Long patronId) {
         borrowingService.borrowBook(bookId, patronId);
         return ResponseEntity.ok("Book borrowed successfully.");
     }
 
-    @PutMapping("/{bookId}/patron/{patronId}")
+    @PutMapping("/return/{bookId}/patron/{patronId}")
     public ResponseEntity<?> returnBook(@PathVariable("bookId") Long bookId, @PathVariable("patronId") Long patronId) {
         try {
             borrowingService.returnBook(bookId, patronId);
