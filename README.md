@@ -126,3 +126,11 @@ To run the tests for the Library Management System API, execute the following co
      ```bash
      ./gradlew test
      ```
+     
+### Running Tests with Visual Studio Code
+
+1. **Open Project in Visual Studio Code**: Open the project folder in Visual Studio Code.
+
+2. **Navigate to Test Explorer**: In the sidebar, click on the "Testing" icon to open the Test Explorer.
+
+3. **Run Tests**: In the Test Explorer, you will see a list of available tests. You can run individual tests or click on the "Run Tests" button to execute all tests.
