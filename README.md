@@ -27,7 +27,7 @@ To run the Library Management System API, follow these steps:
 
 2. **Navigate to the Project Directory**:
    ```bash
-   cd library-management-system-api
+   cd library-management-system
    ```
 
 3. **Build the Application**:
