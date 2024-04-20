@@ -1,6 +1,15 @@
 # Library Management System API Documentation
 
 This is the documentation for the Library Management System API. It provides information on how to run the application, interact with API endpoints, and run tests.
+## Technologies Used
+
+- **Java**: The core programming language used for backend development.
+- **Spring Boot**: A powerful framework for building Java-based applications, providing features like dependency injection, auto-configuration, and more.
+- **Gradle**: A build automation tool used for managing project dependencies and building the application.
+- **H2 Database**: An in-memory relational database used for storing application data during development and testing.
+- **JUnit**: A unit testing framework for Java used to write and run tests for the application.
+- **Postman**: An API client used for testing API endpoints during development.
+- **Git**: A version control system used for managing project source code.
 
 ## Prerequisites
 
@@ -78,6 +87,34 @@ To run the Library Management System API, follow these steps:
 
 - **POST /api/borrow/{bookId}/patron/{patronId}**: Allow a patron to borrow a book.
 - **PUT /api/return/{bookId}/patron/{patronId}**: Record the return of a borrowed book by a patron.
+
+### Using Postman
+
+To simplify testing of the Library Management System API, you can use Postman, a popular API testing tool. Follow the steps below to import the provided API collection into Postman:
+
+1. **Download Collection File**: Download the [library_management_system_api.postman_collection.json](docs/api/library_management_system_api.postman_collection.json) file from this repository.
+
+2. **Open Postman**: Launch the Postman application on your computer.
+
+3. **Import Collection**: Click on the "Import" button located in the top left corner of the Postman application.
+
+4. **Choose File**: In the import modal, select the "Choose Files" button and navigate to the location where you saved the JSON file.
+
+5. **Select File**: Choose the `library_management_system_api.postman_collection.json` file and click "Open" to import it into Postman.
+
+6. **Verify Import**: After the import process completes, you will see the imported collection listed in the left sidebar under the "Collections" tab.
+
+7. **Explore Endpoints**: Click on the collection to expand it and view the individual requests. You can now explore the endpoints and execute requests to interact with your API.
+
+8. **Send Requests with JSON Body**:
+   - Select the request method (POST, PUT).
+   - Enter the endpoint URL.
+   - Go to the **Body** tab.
+   - Select **raw**.
+   - Choose **JSON** from the dropdown.
+   - Enter the JSON data in the request body.
+   - Click the **Send** button to make the request.
+   - View the response in the response body pane.
 
 ## Running Tests
 
