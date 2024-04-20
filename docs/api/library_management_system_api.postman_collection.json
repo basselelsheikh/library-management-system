@@ -1,0 +1,218 @@
+{
+    "info": {
+      "_postman_id": "d09b1870-58b3-41ed-9624-8da350a33bf6",
+      "name": "Library Management System API",
+      "description": "Collection of endpoints for the Library Management System API",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+      {
+        "name": "Book Management Endpoints",
+        "item": [
+          {
+            "name": "Get All Books",
+            "request": {
+              "method": "GET",
+              "header": [],
+              "body": {},
+              "url": {
+                "raw": "http://localhost:8080/api/books",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "8080",
+                "path": ["api", "books"]
+              }
+            }
+          },
+          {
+            "name": "Get Book by ID",
+            "request": {
+              "method": "GET",
+              "header": [],
+              "body": {},
+              "url": {
+                "raw": "http://localhost:8080/api/books/{id}",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "8080",
+                "path": ["api", "books", "{{id}}"]
+              }
+            }
+          },
+          {
+            "name": "Add New Book",
+            "request": {
+              "method": "POST",
+              "header": [],
+              "body": {
+                "mode": "raw",
+                "raw": "{\"title\": \"Book Title\",\"author\": \"Author Name\",\"publicationYear\": 2022,\"isbn\": \"1234567890\"}"
+              },
+              "url": {
+                "raw": "http://localhost:8080/api/books",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "8080",
+                "path": ["api", "books"]
+              }
+            }
+          },
+          {
+            "name": "Update Book",
+            "request": {
+              "method": "PUT",
+              "header": [],
+              "body": {
+                "mode": "raw",
+                "raw": "{\"title\": \"New Title\",\"author\": \"New Author\",\"publicationYear\": 2023,\"isbn\": \"0987654321\"}"
+              },
+              "url": {
+                "raw": "http://localhost:8080/api/books/{id}",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "8080",
+                "path": ["api", "books", "{{id}}"]
+              }
+            }
+          },
+          {
+            "name": "Delete Book",
+            "request": {
+              "method": "DELETE",
+              "header": [],
+              "body": {},
+              "url": {
+                "raw": "http://localhost:8080/api/books/{id}",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "8080",
+                "path": ["api", "books", "{{id}}"]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "Patron Management Endpoints",
+        "item": [
+          {
+            "name": "Get All Patrons",
+            "request": {
+              "method": "GET",
+              "header": [],
+              "body": {},
+              "url": {
+                "raw": "http://localhost:8080/api/patrons",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "8080",
+                "path": ["api", "patrons"]
+              }
+            }
+          },
+          {
+            "name": "Get Patron by ID",
+            "request": {
+              "method": "GET",
+              "header": [],
+              "body": {},
+              "url": {
+                "raw": "http://localhost:8080/api/patrons/{id}",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "8080",
+                "path": ["api", "patrons", "{{id}}"]
+              }
+            }
+          },
+          {
+            "name": "Add New Patron",
+            "request": {
+              "method": "POST",
+              "header": [],
+              "body": {
+                "mode": "raw",
+                "raw": "{\"name\": \"Patron Name\",\"email\": \"patron@example.com\",\"contact\": \"1234567890\"}"
+              },
+              "url": {
+                "raw": "http://localhost:8080/api/patrons",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "8080",
+                "path": ["api", "patrons"]
+              }
+            }
+          },
+          {
+            "name": "Update Patron",
+            "request": {
+              "method": "PUT",
+              "header": [],
+              "body": {
+                "mode": "raw",
+                "raw": "{\"name\": \"New Name\",\"email\": \"newemail@example.com\",\"contact\": \"9876543210\"}"
+              },
+              "url": {
+                "raw": "http://localhost:8080/api/patrons/{id}",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "8080",
+                "path": ["api", "patrons", "{{id}}"]
+              }
+            }
+          },
+          {
+            "name": "Delete Patron",
+            "request": {
+              "method": "DELETE",
+              "header": [],
+              "body": {},
+              "url": {
+                "raw": "http://localhost:8080/api/patrons/{id}",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "8080",
+                "path": ["api", "patrons", "{{id}}"]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "Borrowing Endpoints",
+        "item": [
+          {
+            "name": "Borrow Book",
+            "request": {
+              "method": "POST",
+              "header": [],
+              "body": {},
+              "url": {
+                "raw": "http://localhost:8080/api/borrow/{bookId}/patron/{patronId}",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "8080",
+                "path": ["api", "borrow", "{{bookId}}", "patron", "{{patronId}}"]
+              }
+            }
+          },
+          {
+            "name": "Return Book",
+            "request": {
+              "method": "PUT",
+              "header": [],
+              "body": {},
+              "url": {
+                "raw": "http://localhost:8080/api/return/{bookId}/patron/{patronId}",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "8080",
+                "path": ["api", "return", "{{bookId}}", "patron", "{{patronId}}"]
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }
+  
