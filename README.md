@@ -31,14 +31,24 @@ To run the Library Management System API, follow these steps:
    ```
 
 3. **Build the Application**:
-   ```bash
-   ./gradlew build
-   ```
+   - **Windows**:
+     ```bash
+     .\gradlew build
+     ```
+   - **Linux/macOS**:
+     ```bash
+     ./gradlew build
+     ```
 
 4. **Run the Application**:
-   ```bash
-   ./gradlew bootRun
-   ```
+   - **Windows**:
+     ```bash
+     .\gradlew bootRun
+     ```
+   - **Linux/macOS**:
+     ```bash
+     ./gradlew bootRun
+     ```
 
    The application will start, and you can access it at `http://localhost:8080`.
 
@@ -69,6 +79,11 @@ To run the Library Management System API, follow these steps:
 
 To run the tests for the Library Management System API, execute the following command:
 
-```bash
-./gradlew test
-```
+- **Windows**:
+     ```bash
+     .\gradlew test
+     ```
+- **Linux/macOS**:
+     ```bash
+     ./gradlew test
+     ```
