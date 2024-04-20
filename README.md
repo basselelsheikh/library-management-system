@@ -92,21 +92,19 @@ To run the Library Management System API, follow these steps:
 
 To simplify testing of the Library Management System API, you can use Postman, a popular API testing tool. Follow the steps below to import the provided API collection into Postman:
 
-1. **Download Collection File**: Download the [library_management_system_api.postman_collection.json](docs/api/library_management_system_api.postman_collection.json) file from this repository.
+1. **Open Postman**: Launch the Postman application on your computer.
 
-2. **Open Postman**: Launch the Postman application on your computer.
+2. **Import Collection**: Click on the "Import" button located in the top left corner of the Postman application.
 
-3. **Import Collection**: Click on the "Import" button located in the top left corner of the Postman application.
+3. **Choose File**: In the import modal, select the "Choose Files" button and navigate to the `docs/api/` folder in this repository.
 
-4. **Choose File**: In the import modal, select the "Choose Files" button and navigate to the location where you saved the JSON file.
+4. **Select File**: Choose the `library_management_system_api.postman_collection.json` file and click "Open" to import it into Postman.
 
-5. **Select File**: Choose the `library_management_system_api.postman_collection.json` file and click "Open" to import it into Postman.
+5. **Verify Import**: After the import process completes, you will see the imported collection listed in the left sidebar under the "Collections" tab.
 
-6. **Verify Import**: After the import process completes, you will see the imported collection listed in the left sidebar under the "Collections" tab.
-
-7. **Explore Endpoints**: Click on the collection to expand it and view the individual requests. You can now explore the endpoints and execute requests to interact with your API.
-
-8. **Send Requests with JSON Body**:
+6. **Explore Endpoints**: Click on the collection to expand it and view the individual requests. You can now explore the endpoints and execute requests to interact with your API.
+   
+7. **Send Requests with JSON Body**:
    - Select the request method (POST, PUT).
    - Enter the endpoint URL.
    - Go to the **Body** tab.
@@ -128,3 +126,11 @@ To run the tests for the Library Management System API, execute the following co
      ```bash
      ./gradlew test
      ```
+     
+### Running Tests with Visual Studio Code
+
+1. **Open Project in Visual Studio Code**: Open the project folder in Visual Studio Code.
+
+2. **Navigate to Test Explorer**: In the sidebar, click on the "Testing" icon to open the Test Explorer.
+
+3. **Run Tests**: In the Test Explorer, you will see a list of available tests. You can run individual tests or click on the "Run Tests" button to execute all tests.
