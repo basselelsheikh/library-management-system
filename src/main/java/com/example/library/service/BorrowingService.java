@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.library.exception.ErrorCodes;
+import com.example.library.exception.LibraryException;
 import com.example.library.model.Book;
 import com.example.library.model.BorrowingRecord;
 import com.example.library.model.Patron;
@@ -34,15 +36,15 @@ public class BorrowingService {
     @Transactional
     public void borrowBook(Long bookId, Long patronId) {
         Book book = bookRepository.findById(bookId)
-                .orElseThrow(() -> new RuntimeException("Book not found with id: " + bookId));
+                .orElseThrow(() -> new LibraryException("Book not found with ID: " + bookId, ErrorCodes.BOOK_NOT_FOUND));
 
         Patron patron = patronRepository.findById(patronId)
-                .orElseThrow(() -> new RuntimeException("Patron not found with id: " + patronId));
+                .orElseThrow(() -> new LibraryException("Patron not found with id: " + patronId, ErrorCodes.PATRON_NOT_FOUND));
 
         List<BorrowingRecord> borrowingRecords = borrowingRecordRepository.findByBookId(bookId);
 
         if (!book.isAvailableForBorrowing(borrowingRecords)) {
-            throw new RuntimeException("Book with id " + bookId + " is not available for borrowing.");
+                throw new LibraryException("Book with ID " + bookId + " is already borrowed.", ErrorCodes.BOOK_ALREADY_BORROWED);
         }
         BorrowingRecord borrowingRecord = new BorrowingRecord(LocalDate.now(), book, patron, null);
 
