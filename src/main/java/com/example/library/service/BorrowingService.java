@@ -20,53 +20,59 @@ import jakarta.transaction.Transactional;
 @Service
 public class BorrowingService {
 
-    private final BorrowingRecordRepository borrowingRecordRepository;
-    private final BookRepository bookRepository;
-    private final PatronRepository patronRepository;
+        private final BorrowingRecordRepository borrowingRecordRepository;
+        private final BookRepository bookRepository;
+        private final PatronRepository patronRepository;
 
-    @Autowired
-    public BorrowingService(BorrowingRecordRepository borrowingRecordRepository,
-            BookRepository bookRepository,
-            PatronRepository patronRepository) {
-        this.borrowingRecordRepository = borrowingRecordRepository;
-        this.bookRepository = bookRepository;
-        this.patronRepository = patronRepository;
-    }
-
-    @Transactional
-    public void borrowBook(Long bookId, Long patronId) {
-        Book book = bookRepository.findById(bookId)
-                .orElseThrow(() -> new LibraryException("Book not found with ID: " + bookId, ErrorCodes.BOOK_NOT_FOUND));
-
-        Patron patron = patronRepository.findById(patronId)
-                .orElseThrow(() -> new LibraryException("Patron not found with id: " + patronId, ErrorCodes.PATRON_NOT_FOUND));
-
-        List<BorrowingRecord> borrowingRecords = borrowingRecordRepository.findByBookId(bookId);
-
-        if (!book.isAvailableForBorrowing(borrowingRecords)) {
-                throw new LibraryException("Book with ID " + bookId + " is already borrowed.", ErrorCodes.BOOK_ALREADY_BORROWED);
+        @Autowired
+        public BorrowingService(BorrowingRecordRepository borrowingRecordRepository,
+                        BookRepository bookRepository,
+                        PatronRepository patronRepository) {
+                this.borrowingRecordRepository = borrowingRecordRepository;
+                this.bookRepository = bookRepository;
+                this.patronRepository = patronRepository;
         }
-        BorrowingRecord borrowingRecord = new BorrowingRecord(LocalDate.now(), book, patron, null);
 
-        borrowingRecordRepository.save(borrowingRecord);
-    }
+        @Transactional
+        public void borrowBook(Long bookId, Long patronId) {
+                Book book = bookRepository.findById(bookId)
+                                .orElseThrow(() -> new LibraryException("Book not found with ID: " + bookId,
+                                                ErrorCodes.BOOK_NOT_FOUND));
 
-    @Transactional
-    public void returnBook(Long bookId, Long patronId) {
-        bookRepository.findById(bookId)
-                .orElseThrow(() -> new RuntimeException("Book not found with id: " + bookId));
+                Patron patron = patronRepository.findById(patronId)
+                                .orElseThrow(() -> new LibraryException("Patron not found with id: " + patronId,
+                                                ErrorCodes.PATRON_NOT_FOUND));
 
-        patronRepository.findById(patronId)
-                .orElseThrow(() -> new RuntimeException("Patron not found with id: " + patronId));
+                List<BorrowingRecord> borrowingRecords = borrowingRecordRepository.findByBookId(bookId);
 
-        BorrowingRecord borrowingRecord = borrowingRecordRepository
-                .findByBookIdAndPatronIdAndReturnDateIsNull(bookId, patronId)
-                .orElseThrow(() -> new RuntimeException("No active borrowing record found for book with id " + bookId
-                        + " and patron with id " + patronId));
+                if (!book.isAvailableForBorrowing(borrowingRecords)) {
+                        throw new LibraryException("Book with ID " + bookId + " is already borrowed.",
+                                        ErrorCodes.BOOK_ALREADY_BORROWED);
+                }
+                BorrowingRecord borrowingRecord = new BorrowingRecord(LocalDate.now(), book, patron, null);
 
-        borrowingRecord.setReturnDate(LocalDate.now());
+                borrowingRecordRepository.save(borrowingRecord);
+        }
 
-        borrowingRecordRepository.save(borrowingRecord);
-    }
+        @Transactional
+        public void returnBook(Long bookId, Long patronId) {
+                bookRepository.findById(bookId)
+                                .orElseThrow(() -> new LibraryException("Book not found with id: " + bookId,
+                                                ErrorCodes.BOOK_NOT_FOUND));
+
+                patronRepository.findById(patronId)
+                                .orElseThrow(() -> new LibraryException("Patron not found with id: " + patronId,
+                                                ErrorCodes.PATRON_NOT_FOUND));
+
+                BorrowingRecord borrowingRecord = borrowingRecordRepository
+                                .findByBookIdAndPatronIdAndReturnDateIsNull(bookId, patronId)
+                                .orElseThrow(() -> new LibraryException(
+                                                "No active borrowing record found for book with id " + bookId
+                                                                + " and patron with id " + patronId, ErrorCodes.NO_ACTIVE_BORROWING_RECORD));
+
+                borrowingRecord.setReturnDate(LocalDate.now());
+
+                borrowingRecordRepository.save(borrowingRecord);
+        }
 
 }

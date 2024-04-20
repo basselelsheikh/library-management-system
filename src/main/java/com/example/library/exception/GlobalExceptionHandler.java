@@ -28,16 +28,9 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(LibraryException.class)
     public ResponseEntity<?> handleLibraryException(LibraryException ex) {
-        String errorCode = ex.getErrorCode();
         String errorMessage = ex.getMessage();
-
         HttpStatus status;
-        if (ErrorCodes.BOOK_NOT_FOUND.equals(errorCode) || ErrorCodes.BOOK_ALREADY_BORROWED.equals(errorCode) || ErrorCodes.PATRON_NOT_FOUND.equals(errorCode)) {
-            status = HttpStatus.BAD_REQUEST;
-        } else {
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-        }
-
+        status = HttpStatus.BAD_REQUEST;
         return ResponseEntity.status(status).body(errorMessage);
     }
 

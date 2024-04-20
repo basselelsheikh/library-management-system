@@ -29,16 +29,10 @@ public class PatronService {
     }
 
     public Patron addPatron(Patron patron) {
-        // Perform any necessary validation or business logic before saving the patron
-        
-        // Save the patron using the PatronRepository
         return patronRepository.save(patron);
     }
 
     public Patron updatePatron(Patron updatedPatron) {
-        // Perform any necessary validation or business logic before updating the patron
-
-        // Save the updated patron using the PatronRepository
         return patronRepository.save(updatedPatron);
     }
 

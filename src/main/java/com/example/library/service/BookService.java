@@ -29,17 +29,10 @@ public class BookService {
     }
 
     public Book addBook(Book book) {
-        // Perform any necessary validation or business logic before saving the book
-        // For example, you could check if the book already exists, validate input fields, etc.
-        
-        // Save the book using the BookRepository
         return bookRepository.save(book);
     }
 
     public Book updateBook(Book updatedBook) {
-        // Perform any necessary validation or business logic before updating the book
-        
-        // Save the updated book using the BookRepository
         return bookRepository.save(updatedBook);
     }
 

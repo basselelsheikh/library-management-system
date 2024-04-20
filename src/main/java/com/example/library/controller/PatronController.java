@@ -54,7 +54,7 @@ public class PatronController {
     public ResponseEntity<Patron> updatePatron(@PathVariable("id") Long id, @Valid @RequestBody Patron updatedPatron) {
         Patron existingPatron = patronService.getPatronById(id);
         if (existingPatron != null) {
-            updatedPatron.setId(id); // Ensure the updated patron has the correct ID
+            updatedPatron.setId(id);
             Patron savedPatron = patronService.updatePatron(updatedPatron);
             return new ResponseEntity<>(savedPatron, HttpStatus.OK);
         } else {
