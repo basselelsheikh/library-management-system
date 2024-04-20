@@ -50,7 +50,11 @@ To run the Library Management System API, follow these steps:
      ./gradlew bootRun
      ```
 
-   The application will start, and you can access it at `http://localhost:8080`.
+   The application will start, and you can access the H2 database console at [http://localhost:8080/h2-console](http://localhost:8080/h2-console).
+   
+   **Credentials for H2 Database Console:**
+   - Username: `sa`
+   - Password: `pa`
 
 ## Interacting with API Endpoints
 
